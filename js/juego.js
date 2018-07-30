@@ -296,3 +296,4 @@ function iniciarNuevaPartida() {
 
 // Añadir evento 
 document.getElementById('btn').addEventListener('click',nuevaPartida);
+
