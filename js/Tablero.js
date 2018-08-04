@@ -2,6 +2,10 @@
 var Tablero = function(cantidadPiezas){
     this.cantidadPiezas = cantidadPiezas;
     this.grilla =[[]];
+    this.imagen = '';
+    //se instancian los atributos que indican la posicion de las fila y columna vacias de acuerdo a la cantidad de piezas por lado para que sea la ultima del tablero
+    this.filaPosicionVacia = this.cantidadPiezas - 1;
+    this.columnaPosicionVacia = this.cantidadPiezas - 1;
 }
 Tablero.prototype.crearGrilla = function(){
     //Creo el array
@@ -25,4 +29,23 @@ Tablero.prototype.posicionValida = function(fila, columna) {
         return false;
     }
 
+}
+Tablero.prototype.cargarImagen = function (e) {
+    //se calcula el ancho y el alto de las piezas de acuerdo al tamaño del canvas (600). 
+    this.anchoPiezas = Math.floor(600 / this.cantidadDePiezasPorLado);
+    this.altoPiezas = Math.floor(600 / this.cantidadDePiezasPorLado);
+    //se calcula el ancho y alto del rompecabezas de acuerdo al ancho y alto de cada pieza y la cantidad de piezas por lado
+    this.anchoDeRompecabezas = this.anchoPiezas * this.cantidadDePiezasPorLado;
+    this.altoDeRompecabezas = this.altoPiezas * this.cantidadDePiezasPorLado;
+    this.configurarCanvas();
+}
+Tablero.prototype.iniciarImagen = function (callback) {
+    this.imagen = new Image();
+    var self = this;
+    //se espera a que se termine de cargar la imagen antes de ejecutar la siguiente funcion
+    this.imagen.addEventListener('load', function () {
+        self.cargarImagen.call(self);
+        callback();
+    }, false);
+    this.imagen.src = "images/final.png";
 }

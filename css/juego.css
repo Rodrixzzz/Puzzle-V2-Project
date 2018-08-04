@@ -52,12 +52,14 @@ li::before {
   text-align: center;
 }
 
-#juego {
+#juego ,
+#canvas {
   text-align: center;
   animation: fadein 2s;
   width: 600px;
   height: 600px;
 }
+
 
 @keyframes fadein {
   from {
